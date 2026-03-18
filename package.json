@@ -1,0 +1,12 @@
+{
+  "name": "resume-monorepo",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "install:all": "npm install --prefix BACKEND && npm install --prefix FRONTEND",
+    "dev:backend": "npm run dev --prefix BACKEND",
+    "dev:frontend": "npm run dev --prefix FRONTEND",
+    "start": "npm run start --prefix BACKEND",
+    "dev": "npm run dev:backend"
+  }
+}
