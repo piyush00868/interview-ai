@@ -41,7 +41,12 @@ async function registerUserController(req, res) {
         { expiresIn: "10d" }
     )
 
-    res.cookie("token", token)
+    res.cookie("token", token, {
+  httpOnly: true,
+  secure: true,
+  sameSite: "none",
+  path: "/"
+});
 
 
     res.status(201).json({
@@ -112,7 +117,12 @@ async function logoutUserController(req, res) {
         await BlacklistModel.create({ token })
         
     }
-    res.clearCookie("token")
+    res.clearCookie("token", {
+  httpOnly: true,
+  secure: true,
+  sameSite: "none",
+  path: "/"
+});
     res.status(200).json({
         message: "User logged out successfully , Token has been blacklisted"
     })
