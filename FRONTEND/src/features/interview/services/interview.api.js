@@ -1,27 +1,31 @@
-import axios from "axios"
+import axios from "axios";
 
 const api = axios.create({
- baseURL: import.meta.env.VITE_API_URL,
-  withCredentials: true,
+    baseURL: "http://localhost:8000",
+    withCredentials: true,
 })
+
+
 /**
  * @description Service to generate interview report based on user self description, resume and job description.
  */
-export async function generateInterviewReport({ jobDescription, selfDescription, resumeFile }) {
-  const formData = new FormData()
-  formData.append("jobDescription", jobDescription)
-  formData.append("selfDescription", selfDescription)
-  if (resumeFile) {
-    formData.append("resume", resumeFile)
-  }
-  const response = await api.post("/api/interview", formData, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  })
+export const generateInterviewReport = async ({ jobDescription, selfDescription, resumeFile }) => {
 
-  return response.data
+    const formData = new FormData()
+    formData.append("jobDescription", jobDescription)
+    formData.append("selfDescription", selfDescription)
+    formData.append("resume", resumeFile)
+
+    const response = await api.post("/api/interview/", formData, {
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }
+    })
+
+    return response.data
+
 }
+
 
 /**
  * @description Service to get interview report by interviewId.
