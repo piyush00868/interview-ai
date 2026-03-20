@@ -90,12 +90,13 @@ async function loginUserController(req, res) {
         process.env.JWT_SECRET,
         { expiresIn: "1d" }
     )
-
-    res.cookie("token", token, {
-    httpOnly: true,
-    secure: true,        // required for HTTPS (Vercel)
-    sameSite: "none"     // VERY IMPORTANT for cross-origin
+res.cookie("token", token, {
+  httpOnly: true,
+  secure: true,
+  sameSite: "none",
+  path: "/"
 });
+console.log("Login hit");
     res.status(200).json({
         message: "User loggedIn successfully.",
         user: {
