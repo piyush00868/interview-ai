@@ -1,6 +1,6 @@
 import axios from "axios"
 const api= axios.create({
-    baseURL:'http://localhost:8000',
+    baseURL:import.meta.env.VITE_API_URL,
     withCredentials:true
 })
 
@@ -25,7 +25,7 @@ export async function login({email,password}){
 
 export async function logout(){ 
     try{
-        const response = await api.get('http://localhost:8000/api/auth/logout',)
+        const response = await api.get(import.meta.env.VITE_API_URL/api/auth/logout,)
        return response.data
     } catch(err){
         console.log(err)
