@@ -40,12 +40,12 @@ async function registerUserController(req, res) {
         process.env.JWT_SECRET,
         { expiresIn: "10d" }
     )
-     res.cookie("token", token, {
+    res.cookie("token", token, {
     httpOnly: true,
-    secure: true,        // ✅ REQUIRED for HTTPS
-    sameSite: "None",    // ✅ REQUIRED for cross-origin
+    secure: true,
+    sameSite: "None",
+    maxAge: 24 * 60 * 60 * 1000 // ✅ ADD THIS
 });
-
     res.status(201).json({
         message: "User registered successfully",
         user: {
@@ -87,10 +87,11 @@ async function loginUserController(req, res) {
         process.env.JWT_SECRET,
         { expiresIn: "1d" }
     )
-     res.cookie("token", token, {
+    res.cookie("token", token, {
     httpOnly: true,
-    secure: true,        // ✅ REQUIRED for HTTPS
-    sameSite: "None",    // ✅ REQUIRED for cross-origin
+    secure: true,
+    sameSite: "None",
+    maxAge: 24 * 60 * 60 * 1000 // ✅ ADD THIS
 });
 console.log("Login hit");
     res.status(200).json({
@@ -114,10 +115,10 @@ async function logoutUserController(req, res) {
         await BlacklistModel.create({ token })
         
     }
-    res.cookie("token", token, {
+    res.clearCookie("token", {
     httpOnly: true,
-    secure: true,        // ✅ REQUIRED for HTTPS
-    sameSite: "None",    // ✅ REQUIRED for cross-origin
+    secure: true,
+    sameSite: "None"
 });
     res.status(200).json({
         message: "User logged out successfully , Token has been blacklisted"
