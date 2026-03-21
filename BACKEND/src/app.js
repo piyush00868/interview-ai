@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-    origin:'http://localhost:4173',
+    origin:'https://interview-ai-gamma-three.vercel.app',
     credentials : true
 }))
 
