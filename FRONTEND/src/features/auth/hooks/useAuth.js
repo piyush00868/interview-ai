@@ -59,4 +59,3 @@ useEffect(()=>{
 
 return {user, loading, handleRegister , handleLogin, handleLogout}
 }
-
